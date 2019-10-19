@@ -1,10 +1,10 @@
 # Cancer Detection Project (Python)
 
 ## Dependencies: 
-pandas, sklearn, matplotlib, scipy, seaborn, numpy
+keras, tensorflow 2.0, pandas, sklearn, matplotlib, scipy, seaborn, numpy
 
 ## Files:
-The jupyternotebook is [here](). 
+The jupyternotebooks are: [EDA](https://nbviewer.jupyter.org/github.com/liminal-learner/cancer_detection/notebooks/1_CancerDetectionEDA.ipynb), [Dev](https://nbviewer.jupyter.org/github.com/liminal-learner/cancer_detection/notebooks/2_Develop.ipynb). 
 
 ## 4'D' Data Science Framework: 
 I use the 4D framework for my data science projects. It is a simple and reliable method of solving a business problem with data.
@@ -18,9 +18,9 @@ The evaluation metric is area under the ROC curve, which is a good metric for th
 ## Data (See https://github.com/basveeling/pcam and https://www.kaggle.com/c/histopathologic-cancer-detection/data):
 * "(96 x 96px) extracted from histopathologic scans of lymph node sections. Each image is annoted with a binary label indicating presence of metastatic tissue."
 * A positive label indicates that the center 32x32px region of a patch contains at least one pixel of tumor tissue. Tumor tissue in the outer region of the patch does not influence the label. 
-* 262,144 training examples
-* 32,768 each cross-validation and test set
-* All have a 50/50 balance between positive and negative examples
+* 220025 training examples
+* 57458 test set
+* The training set is somewhat unbalanced: 59.4% negative, 40.5% positive
 * "The original PCam dataset contains duplicate images due to its probabilistic sampling, however, the version presented on Kaggle does not contain duplicates."
 
 # Develop:
