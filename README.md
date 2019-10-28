@@ -4,13 +4,13 @@
 keras, tensorflow 2.0, pandas, sklearn, matplotlib, scipy, seaborn, numpy
 
 ## Files:
-The jupyternotebooks are: [EDA](https://nbviewer.jupyter.org/github.com/liminal-learner/cancer_detection/notebooks/1_CancerDetectionEDA.ipynb), [Dev](https://nbviewer.jupyter.org/github.com/liminal-learner/cancer_detection/notebooks/2_Develop.ipynb). 
+The jupyternotebooks are: [EDA](https://nbviewer.jupyter.org/github/liminal-learner/cancer_detection/blob/master/notebooks/1_CancerDetection_EDA.ipynb), [Dev](https://nbviewer.jupyter.org/github/liminal-learner/cancer_detection/blob/master/notebooks/2_Develop.ipynb). 
 
 ## 4'D' Data Science Framework: 
 I use the 4D framework for my data science projects. It is a simple and reliable method of solving a business problem with data.
 
 # Define: 
-The kaggle competition is [here].(https://www.kaggle.com/c/histopathologic-cancer-detection/overview/evaluation)
+The kaggle competition is [here](https://www.kaggle.com/c/histopathologic-cancer-detection/overview/evaluation).
 The goal of this project is to identify metastatic cancer in small image patches taken from a version of the PCam benchmark dataset. 
 The evaluation metric is area under the ROC curve, which is a good metric for this classification problem since it measures the probability that a true positive classification does better than (outranks) a negative one and is thus independent of the classification threshold. Since I care mostly about the final class prediction and not fine tuning the threshold, this is a good metric.
 
