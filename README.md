@@ -1,5 +1,7 @@
 # Cancer Detection Project (Python)
 
+### Please note: I am actively working on this project and will be finishing it up in the next couple of days.
+
 ## Dependencies: 
 keras, tensorflow 2.0, pandas, sklearn, matplotlib, scipy, seaborn, numpy
 
@@ -28,7 +30,7 @@ The evaluation metric is area under the ROC curve, which is a good metric for th
 
 ## Models:
 
-## Results (MSE):
+## Results (AUC):
 
 ## Feature Importance:
 
