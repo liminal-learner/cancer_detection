@@ -1,7 +1,7 @@
 import pandas as pd
 from keras.preprocessing.image import ImageDataGenerator
 
-class Data:
+class DataGenerator:
     """
     This class creates dataframes containing ID and the label, if it exists
     for the train, validation, and test sets. The IDs for the tets set need to
@@ -9,12 +9,12 @@ class Data:
     image generators by flowing from the dataframes that can be used to fit a model.
     """
 
-    def __init__(self, train_path, train_labels_path, test_path, unique_identifier, target_class_column):
+    def __init__(self, train_path, train_labels_path, test_path, unique_identifier, image_size, n_channels, target_class_column, validation_frac):
         self.train_path = train_path
         self.train_labels_path = train_labels_path
         self.test_path = test_path
 
-        self.train_data_gen = ImageDataGenerator(validation_split = 0.2,
+        self.train_data_gen = ImageDataGenerator(validation_split = validation_frac #0.2,
                                                  # Fraction of images reserved for validation
                                                 rescale = 1./255,  # Normalize
                                                 horizontal_flip = True, # Randomly flip the orientations for training
@@ -23,10 +23,10 @@ class Data:
                                                 horizontal_flip = True,
                                                 vertical_flip = True)
 
-        self.image_size = (96, 96)
-        self.n_channels = 3
-        self.unique_identifier = 'id'
-        self.target_class_column = 'label'
+        self.image_size = image_size # (96, 96)
+        self.n_channels = n_channels # 3
+        self.unique_identifier = unique_identifier # 'id'
+        self.target_class_column = target_class_column # 'label'
 
         self.train_df = self._create_train_df(self.train_labels_path)
         self.test_df = self._create_test_df(self.test_path)
