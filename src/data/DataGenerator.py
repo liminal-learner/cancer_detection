@@ -14,7 +14,7 @@ class DataGenerator:
         self.train_labels_path = train_labels_path
         self.test_path = test_path
 
-        self.train_data_gen = ImageDataGenerator(validation_split = validation_frac #0.2,
+        self.train_data_gen = ImageDataGenerator(validation_split = validation_frac, #0.2,
                                                  # Fraction of images reserved for validation
                                                 rescale = 1./255,  # Normalize
                                                 horizontal_flip = True, # Randomly flip the orientations for training
