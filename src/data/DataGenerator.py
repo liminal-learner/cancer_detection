@@ -16,7 +16,7 @@ class DataGenerator:
 
         # Fraction of images reserved for validation
         self.train_data_gen = ImageDataGenerator(validation_split = 0.2, 
-                                                rescale = 1./255,  # Normalize
+                                                rescale = 1/255,  # Normalize
                                                 horizontal_flip = True, # Randomly flip the orientations for training
                                                 vertical_flip = True)
         self.test_data_gen = ImageDataGenerator(rescale = 1./255,
