@@ -34,7 +34,9 @@ class ModelContainer:
         # Loads a model from file and adds it to the container
         model = keras.models.load_model(model_path)
         self.add_model(model)
-        self.get_auc(model.history, model.name)
+        
+        # This won't work - keras doesn't store the history. Will have to implement explicitly later.
+        # self.get_auc(model.history, model.name)
         
     def train_model(self, data, model_name):
 
@@ -63,8 +65,9 @@ class ModelContainer:
         # Selects and saves the best model based based on AUC on validation set:
         self.best_model_name = max(self.val_roc_auc, key = self.val_roc_auc.get)
 
-    def best_model_predict(self, data_gen):
-        self.predictions = self.models[self.best_model_name].predict(data_gen, verbose = 1)
+    def make_predictions(self, model_name, data_gen):
+        # Score a data set using the specified model:
+        self.predictions = self.models[model_name].predict(data_gen, verbose = 1)
 
     def print_summary(self):
         print('\nModel Summaries:\n')
