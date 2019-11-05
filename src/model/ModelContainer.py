@@ -65,8 +65,8 @@ class ModelContainer:
     def print_summary(self):
         print('\nModel Summaries:\n')
         for model_name in self.models.keys():
-            print('\n', model_name, '- ROC AUC:', self.models.roc_auc[model_name])
-            print('\n', model_name, '- Validation ROC AUC:', self.models.val_roc_auc[model_name])
+            print('\n', model_name, '- ROC AUC:', self.roc_auc[model_name])
+            print('\n', model_name, '- Validation ROC AUC:', self.val_roc_auc[model_name])
 
         print('\nBest Model:\n', self.best_model_name)
-        print('\nROC AUC of Best Model\n', models.roc_auc[self.best_model_name])
+        print('\nROC AUC of Best Model\n', self.roc_auc[self.best_model_name])
