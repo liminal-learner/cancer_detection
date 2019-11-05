@@ -1,12 +1,12 @@
 # Cancer Detection Project (Python)
 
-### Please note: I am actively working on this project and will be finishing it up in the next couple of days.
+### Please note: I am actively working on this project and will be finishing it up shortly.
 
 ## Dependencies: 
 keras, tensorflow 2.0, pandas, sklearn, matplotlib, scipy, seaborn, numpy
 
 ## Files:
-The jupyternotebooks are: [EDA](https://nbviewer.jupyter.org/github/liminal-learner/cancer_detection/blob/master/notebooks/1_CancerDetection_EDA.ipynb), [Dev](https://nbviewer.jupyter.org/github/liminal-learner/cancer_detection/blob/master/notebooks/2_Develop.ipynb). 
+The jupyternotebooks are: [EDA](https://nbviewer.jupyter.org/github/liminal-learner/cancer_detection/blob/master/notebooks/1_CancerDetection_EDA.ipynb), [Develop](https://nbviewer.jupyter.org/github/liminal-learner/cancer_detection/blob/master/notebooks/2_Develop.ipynb), [Deploy](https://nbviewer.jupyter.org/github/liminal-learner/cancer_detection/blob/master/notebooks/3_Deploy.ipynb). 
 
 ## 4'D' Data Science Framework: 
 I use the 4D framework for my data science projects. It is a simple and reliable method of solving a business problem with data.
