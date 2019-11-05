@@ -23,12 +23,19 @@ class ModelContainer:
     def add_model(self, model):
         # Adds a compiled model to the container
         self.models[model.name] = model
-
+    
+    def get_auc(self, history, model_name):
+        # For some reason the names of these keys change for multiple runs of the
+        # training procedure:
+        self.roc_auc[model.name] = history.history[list(history.history.keys())[1]][-1] # 'auc'
+        self.val_roc_auc[model.name] = history.history[list(history.history.keys())[3]][-1] # 'val_auc'
+        
     def load_model(self, model_path):
         # Loads a model from file and adds it to the container
         model = keras.models.load_model(model_path)
         self.add_model(model)
-
+        self.get_auc(model.history, model.name)
+        
     def train_model(self, data, model_name):
 
         model = self.models[model_name]
@@ -44,12 +51,9 @@ class ModelContainer:
                             validation_data = (data.validation_generator),
                             #use_multiprocessing=True,
                             callbacks = [checkpoint_cb, reduce_LR_cb, early_stopping_cb])
-
-        # For some reason the names of these keys change for multiple runs of the
-        # training procedure:
-        self.roc_auc[model.name] = history.history[list(history.history.keys())[1]][-1] # 'auc'
-        self.val_roc_auc[model.name] = history.history[list(history.history.keys())[3]][-1] # 'val_auc'
-
+        
+        self.get_auc(history, model.name)
+        
     def save_model(self, model_name):
         # Save to model to file:
         path_to_model = os.path.join(self.models_path, model_name + ".h5")
