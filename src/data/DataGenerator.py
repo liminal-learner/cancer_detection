@@ -61,7 +61,7 @@ class DataGenerator:
                      # for predictions after training.
 
         self.test_generator = self.test_data_gen.flow_from_dataframe(dataframe = self.test_df,
-                                                    directory = test_path,
+                                                    directory = self.test_path,
                                                     x_col = self.unique_identifier, # filename
                                                     class_mode = None,
                                                     target_size = self.image_size,
