@@ -30,10 +30,10 @@ class ModelContainer:
     def _get_auc(self, history, model_name):
         # For some reason the names of these keys change for multiple runs of the
         # training procedure:
-        auc_label = list(history.keys())[1]
-        val_auc_label = list(history.keys())[3]
-        self.roc_auc[model_name] = history[auc_label][-1] # 'auc'
-        self.val_roc_auc[model_name] = history[val_auc_label][-1] # 'val_auc'
+        auc_label = list(history.history.keys())[1]
+        val_auc_label = list(history.history.keys())[3]
+        self.roc_auc[model_name] = history.history[auc_label][-1] # 'auc'
+        self.val_roc_auc[model_name] = history.history[val_auc_label][-1] # 'val_auc'
 
     def load_model(self, model_name):
         model_path = os.path.join(self.models_path, model_name)
@@ -59,7 +59,7 @@ class ModelContainer:
 
         # Save the history as well as the model for plotting later if needed:
         with open(os.path.join(model_dir, 'history.pickle'), 'wb') as file_pi:
-            pickle.dump(self.history[model_name].history, file_pi)
+            pickle.dump(self.history[model_name], file_pi)
 
     def train_model(self, data, model_name, num_epochs):
 
