@@ -52,12 +52,12 @@ class ModelContainer:
         model_dir = os.path.join(self.models_path, model_name)
         os.makedirs(model_dir, exist_ok = True)
         path_to_model = os.path.join(model_dir, model_name + ".h5")
-        
+
         self.models[model_name].save(path_to_model)
 
         # Save the history as well as the model for plotting later if needed:
         with open(os.path.join(model_dir, 'history.pickle'), 'wb') as file_pi:
-            pickle.dump(history.history, file_pi)
+            pickle.dump(self.history[model_name].history, file_pi)
 
     def train_model(self, data, model_name, num_epochs):
 
