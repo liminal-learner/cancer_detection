@@ -42,7 +42,7 @@ class ModelContainer:
         # This won't work - keras doesn't store the history. Will have to implement explicitly later.
         # self.get_auc(model.history, model.name)
 
-    def train_model(self, data, model_name):
+    def train_model(self, data, model_name, num_epochs):
 
         model = self.models[model_name]
 
@@ -53,7 +53,7 @@ class ModelContainer:
         reduce_LR_cb = keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience = 10, verbose = 1, factor = 0.1)
 
         self.history[model_name] = model.fit(data.train_generator,
-                            epochs = 15,
+                            epochs = num_epochs, #15
                             validation_data = (data.validation_generator),
                             #use_multiprocessing=True,
                             callbacks = [checkpoint_cb, reduce_LR_cb, early_stopping_cb])
