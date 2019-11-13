@@ -11,8 +11,8 @@ class DataGenerator:
     """
 
     def __init__(self, train_path, train_labels_path, test_path, unique_identifier,
-                        image_size, n_channels, target_class_column, validation_frac,
-                        train_batch_size):
+                        image_size, n_channels, target_class_column, validation_frac = 0.2,
+                        train_batch_size=64, train_sample_frac=1):
         self.train_path = train_path
         self.train_labels_path = train_labels_path
         self.test_path = test_path
@@ -32,6 +32,11 @@ class DataGenerator:
         self.train_batch_size = train_batch_size
 
         self.train_df = self._create_train_df(self.train_labels_path)
+
+        # Choose random subset of the training data for faster testing of utils etc.
+        if train_sample_frac < 1
+            self.train_df = self.train_df.sample(train_sample_frac, random_state=1)
+
         self.test_df = self._create_test_df(self.test_path)
         self._create_data_generators()
 
