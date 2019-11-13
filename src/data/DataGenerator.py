@@ -35,7 +35,7 @@ class DataGenerator:
 
         # Choose random subset of the training data for faster testing of utils etc.
         if train_sample_frac < 1:
-            self.train_df = self.train_df.sample(train_sample_frac, random_state=1)
+            self.train_df = self.train_df.sample(frac = train_sample_frac, random_state=1)
 
         self.test_df = self._create_test_df(self.test_path)
         self._create_data_generators()
