@@ -35,13 +35,15 @@ class ModelContainer:
         self.roc_auc[model_name] = history.history[auc_label][-1] # 'auc'
         self.val_roc_auc[model_name] = history.history[val_auc_label][-1] # 'val_auc'
 
-    def load_model(self, model_path):
+    def load_model(self, model_name):
+        model_path = os.path.join(self.models_path, model_name)
+        
         # Loads a model from file and adds it to the container
-        model = keras.models.load_model(model_path)
+        model = keras.models.load_model(os.path.join(model_path, model_name + ".h5"))
         self.add_model(model)
 
         # Load the training history
-        with open(os.path.join(self.models_path, model.name, 'history'), "rb") as input_file:
+        with open(os.path.join(model_path, 'history.pickle'), "rb") as input_file:
              self.history[model.name] = pickle.load(input_file)
 
         # Load the metrics from the history
