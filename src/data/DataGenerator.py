@@ -10,7 +10,9 @@ class DataGenerator:
     image generators by flowing from the dataframes that can be used to fit a model.
     """
 
-    def __init__(self, train_path, train_labels_path, test_path, unique_identifier, image_size, n_channels, target_class_column, validation_frac):
+    def __init__(self, train_path, train_labels_path, test_path, unique_identifier,
+                        image_size, n_channels, target_class_column, validation_frac,
+                        train_batch_size):
         self.train_path = train_path
         self.train_labels_path = train_labels_path
         self.test_path = test_path
@@ -27,6 +29,7 @@ class DataGenerator:
         self.n_channels = n_channels # 3
         self.unique_identifier = unique_identifier # 'id'
         self.target_class_column = target_class_column # 'label'
+        self.train_batch_size = train_batch_size
 
         self.train_df = self._create_train_df(self.train_labels_path)
         self.test_df = self._create_test_df(self.test_path)
@@ -50,7 +53,7 @@ class DataGenerator:
                 'y_col': self.target_class_column, # class
                 'target_size': self.image_size,
                 'class_mode':'binary',
-                'batch_size': 64}
+                'batch_size': self.train_batch_size}
 
         self.train_generator = self.train_data_gen.flow_from_dataframe(**pars, subset = 'training')
         self.validation_generator = self.train_data_gen.flow_from_dataframe(**pars,
