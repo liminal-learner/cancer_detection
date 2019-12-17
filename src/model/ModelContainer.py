@@ -59,7 +59,7 @@ class ModelContainer:
 
         # Save the history as well as the model for plotting later if needed:
         with open(os.path.join(model_dir, 'history.pickle'), 'wb') as file_pi:
-            pickle.dump(self.history[model_name].history, file_pi)
+            pickle.dump(self.history[model_name], file_pi)
 
     def train_model(self, data, model_name, num_epochs):
 
@@ -71,13 +71,14 @@ class ModelContainer:
         # Reduce learning rate on plateaus:
         reduce_LR_cb = keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience = 10, verbose = 1, factor = 0.1)
 
-        self.history[model_name] = model.fit(data.train_generator,
+        history = model.fit(data.train_generator,
                             epochs = num_epochs, #15
                             validation_data = (data.validation_generator),
                             #use_multiprocessing=True,
                             callbacks = [checkpoint_cb, reduce_LR_cb, early_stopping_cb])
 
-        self._get_auc(self.history[model_name].history, model_name)
+        self.history[model_name] = history.history
+        self._get_auc(self.history[model_name], model_name)
 
     def select_best_model(self):
         # Selects and saves the best model based based on AUC on validation set:
@@ -101,22 +102,21 @@ class ModelContainer:
     def plot_learning_curve(self, model_name):
         history = self.history[model_name]
 
-        auc_label = list(history.history.keys())[1]
-        val_auc_label = list(history.history.keys())[3]
+        fig, axs = plt.subplots(1, 2, figsize=(15, 7))
 
-        plt.subplots(121)
-        plt.plot(history.history[auc_label])
-        plt.plot(history.history[val_auc_label])
-        plt.title('Model ROC AUC')
-        plt.ylabel('ROC AUC')
-        plt.xlabel('Epoch')
-        plt.legend(['Train', 'Validation'], loc='upper left')
+        auc_label = list(history.keys())[1]
+        val_auc_label = list(history.keys())[3]
 
-        plt.subplots(122)
-        plt.plot(history.history['loss'])
-        plt.plot(history.history['val_loss'])
-        plt.title('Model Loss')
-        plt.ylabel('Loss')
-        plt.xlabel('Epoch')
-        plt.legend(['Train', 'Validation'], loc='upper left')
-        plt.show()
+        axs[0].plot(history[auc_label])
+        axs[0].plot(history[val_auc_label])
+        axs[0].set_title('Model ROC AUC', fontsize = 18)
+        axs[0].set_ylabel('ROC AUC', fontsize = 18)
+        axs[0].set_xlabel('Epoch', fontsize = 18)
+        axs[0].legend(['Train', 'Validation'], loc='upper left', fontsize = 18)
+
+        axs[1].plot(history['loss'])
+        axs[1].plot(history['val_loss'])
+        axs[1].set_title('Model Loss', fontsize = 18)
+        axs[1].set_ylabel('Loss', fontsize = 18)
+        axs[1].set_xlabel('Epoch', fontsize = 18)
+        axs[1].legend(['Train', 'Validation'], loc='upper left', fontsize = 18)
